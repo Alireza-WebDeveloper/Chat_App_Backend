@@ -1,0 +1,232 @@
+openapi: '3.0.0'
+info:
+  title: Game API
+  version: '1.0.0'
+  description: API Documentation for Game Backend
+  contact:
+    name: Amazing Developer
+tags:
+  - name: Game
+    description: Operations related to games
+paths:
+  /api/game:
+    get:
+      summary: Get All Games
+      tags:
+        - Game
+      description: Retrieve the list of games based on platform and genre.
+      parameters:
+        - name: platform
+          in: query
+          schema:
+            type: string
+            enum:
+              - playstation
+              - xbox
+              - steam
+              - pc
+              - android
+              - ios
+              - nintendo
+              - epicgamesstore
+          description: The platform of the games.
+        - name: genre
+          in: query
+          schema:
+            type: string
+            enum:
+              - action
+              - adventure
+              - fps
+              - tps
+              - rpg
+              - strategy
+              - simulation
+              - sports
+              - racing
+              - horror
+              - fantasy
+              - sci-fi
+              - arcade
+              - interactive-fiction
+              - building-construction
+          description: The genre of the games.
+      responses:
+        '200':
+          description: Successful operation
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+  /api/game/{gameId}:
+    get:
+      summary: Get Game Detail
+      tags:
+        - Game
+      description: Retrieve the details of a specific game by its ID.
+      parameters:
+        - name: gameId
+          in: path
+          description: The unique identifier of the game.
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+  /api/banner:
+    get:
+      summary: Get Banner
+      tags:
+        - Game
+      description: Retrieve the banner.
+      responses:
+        '200':
+          description: Successful operation
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+  /api/gamelanding:
+    get:
+      summary: Get gameLanding
+      tags:
+        - Game
+      description: Retrieve the landing page images.
+      responses:
+        '200':
+          description: Successful operation
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+  /api/platform:
+    get:
+      summary: Get platform
+      tags:
+        - Game
+      description: Retrieve the list of game platforms.
+      responses:
+        '200':
+          description: Successful operation
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+  /api/genre:
+    get:
+      summary: Get genre
+      tags:
+        - Game
+      description: Retrieve the list of game genres.
+      responses:
+        '200':
+          description: Successful operation
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+  /api/topGames/{year}:
+    get:
+      summary: Get topGames for a specific year
+      tags:
+        - Game
+      description: Returns the top games for the specified year.
+      parameters:
+        - name: year
+          in: path
+          description: The year of the top games (e.g., 2021, 2022, 2023, ...)
+          required: true
+          schema:
+            type: integer
+            minimum: 2021
+      responses:
+        '200':
+          description: Successful operation
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+  /api/randomGame:
+    get:
+      summary: Get randomGame for slider
+      tags:
+        - Game
+      description: Retrieve a random game for use in a slider.
+      responses:
+        '200':
+          description: Successful operation
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+components:
+  schemas:
+    Game Query Params:
+      type: object
+      properties:
+        platform:
+          type: string
+          enum:
+            - playstation
+            - xbox
+            - steam
+            - pc
+            - android
+            - ios
+            - nintendo
+            - epicgamesstore
+        genre:
+          type: string
+          enum:
+            - action
+            - adventure
+            - fps
+            - tps
+            - rpg
+            - strategy
+            - simulation
+            - sports
+            - racing
+            - horror
+            - fantasy
+            - sci-fi
+            - arcade
+            - interactive-fiction
+            - building-construction
+      required:
+        - platform
+        - genre
+    Year Path Param:
+      type: object
+      properties:
+        year:
+          type: integer
+          minimum: 2021
+      required:
+        - year
+    GameId:
+      type: string
+      required:
+        - gameId
+      description: The unique identifier of the game.
