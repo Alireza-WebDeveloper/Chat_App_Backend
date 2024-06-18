@@ -1,3 +1,4 @@
+# Query , Mutation
 type Query {
   getSource: String!
   getRoute: String!
@@ -7,9 +8,12 @@ type Mutation {
   print(data: DataInput): Data
 }
 
+# Args
 input DataInput {
   name: String!
 }
+
+# Response
 
 type Data {
   name: String!
