@@ -1,5 +1,7 @@
-import { PubSub } from 'graphql-subscriptions';
-import mongoose from 'mongoose';
+import sourceResolver from './source.mjs';
+import pkg from 'lodash';
+
+const { merge } = pkg;
 
 // !! Error Message Function
 function ErrorMessage(message = 'the error message') {
@@ -18,12 +20,6 @@ function ErrorMessage(message = 'the error message') {
 }
 
 // !! Resolvers
-const resolvers = {
-  Query: {
-    getSource: async (_root, data, conext) => {
-      return 'http://localhost:8000/graphql';
-    },
-  },
-};
+const resolvers = merge({}, sourceResolver);
 
 export { resolvers };

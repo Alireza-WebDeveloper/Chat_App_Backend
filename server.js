@@ -1,14 +1,14 @@
 // !! Packages
 import { ApolloServer } from '@apollo/server';
 import { expressMiddleware as apolloMiddleware } from '@apollo/server/express4';
-import { resolvers } from './graphql/resolves.js';
+import { resolvers } from './graphql/resolvers/index.js';
 import { readFile } from 'node:fs/promises';
 import { WebSocketServer } from 'ws';
 import { useServer as useWsServer } from 'graphql-ws/lib/use/ws';
 import { createServer as createHttpServer } from 'node:http';
 import mongoose from 'mongoose';
 import { makeExecutableSchema } from '@graphql-tools/schema';
-
+import typeDefs from './graphql/typeDefs/index.js';
 import app from './app.js';
 
 // !! Connection MongoDb
@@ -26,7 +26,7 @@ process.on('uncaughtException', (err) => {
 });
 
 // !! Connection Apollo Server
-const typeDefs = await readFile('./graphql/typeDefs.graphql', 'utf-8');
+// const typeDefs = await readFile('./graphql/typeDefs/', 'utf-8');
 const schema = makeExecutableSchema({ typeDefs, resolvers });
 const apolloServer = new ApolloServer({ schema });
 await apolloServer.start();

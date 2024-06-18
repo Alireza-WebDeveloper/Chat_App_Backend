@@ -1,3 +1,4 @@
 type Query {
   getSource: String
+  getRoute: String
 }
