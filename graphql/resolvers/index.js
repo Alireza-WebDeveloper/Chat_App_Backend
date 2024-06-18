@@ -1,4 +1,4 @@
-import sourceResolver from './source.mjs';
+import sourceResolver from './source.resolver.mjs';
 import pkg from 'lodash';
 
 const { merge } = pkg;
