@@ -1,4 +1,17 @@
 type Query {
-  getSource: String
-  getRoute: String
+  getSource: String!
+  getRoute: String!
+}
+
+type Mutation {
+  print(data: DataInput): Data
+}
+
+input DataInput {
+  name: String!
+}
+
+type Data {
+  name: String!
+  code: String!
 }
